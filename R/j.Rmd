@@ -1,0 +1,172 @@
+---
+title: "j"
+author: "Brea Koenes"
+date: "1/28/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+(x <- "alfa,bravo,charlie,delta")
+#> [1] "alfa,bravo,charlie,delta"
+strsplit(x, split = ",")
+#> [[1]]
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+```
+
+```{r}
+unlist(strsplit(x, split = ","))
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+
+strsplit(x, split = ",")[[1]]
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+```
+
+```{r}
+strsplit1 <- function(x, split) {
+  strsplit(x, split = split)[[1]]
+}
+```
+
+### use R
+```{r}
+use_r("strsplit1")
+#> • Edit 'R/strsplit1.R'
+#> • Call `use_test()` to create a matching test file
+```
+
+### load all
+```{r}
+load_all()
+#> ℹ Loading regexcite
+(x <- "alfa,bravo,charlie,delta")
+#> [1] "alfa,bravo,charlie,delta"
+strsplit1(x, split = ",")
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+```
+
+```{r}
+exists("strsplit1", where = globalenv(), inherits = FALSE)
+#> [1] FALSE
+```
+
+### check
+```{r}
+check()
+```
+
+### use mit license
+```{r}
+use_mit_license()
+```
+
+### document 
+```{r}
+strsplit1 <- function(x, split) {
+  strsplit(x, split = split)[[1]]}
+  
+document()
+```
+
+```{r}
+install()
+```
+
+```{r}
+library(regexcite)
+
+x <- "alfa,bravo,charlie,delta"
+strsplit1(x, split = ",")
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+```
+
+```{r}
+use_testthat()
+
+use_test("strsplit1")
+#> ✔ Writing 'tests/testthat/test-strsplit1.R'
+#> • Edit 'tests/testthat/test-strsplit1.R'
+```
+```{r}
+test()
+```
+
+```{r}
+use_package("stringr")
+```
+
+```{r}
+str_split_one <- function(string, pattern, n = Inf) {
+  stopifnot(is.character(string), length(string) <= 1)
+  if (length(string) == 1) {
+    stringr::str_split(string = string, pattern = pattern, n = n)[[1]]
+  } else {
+    character()
+  }
+}
+```
+
+```{r}
+rename_files("strsplit1", "str_split_one")
+```
+
+```{r}
+str_split_one <- function(string, pattern, n = Inf) {
+  stopifnot(is.character(string), length(string) <= 1)
+  if (length(string) == 1) {
+    stringr::str_split(string = string, pattern = pattern, n = n)[[1]]
+  } else {
+    character()
+  }
+}
+```
+
+```{r}
+test_that("str_split_one() splits a string", {
+  expect_equal(str_split_one("a,b,c", ","), c("a", "b", "c"))
+})
+
+test_that("str_split_one() errors if input length > 1", {
+  expect_error(str_split_one(c("a,b","c,d"), ","))
+})
+
+test_that("str_split_one() exposes features of stringr::str_split()", {
+  expect_equal(str_split_one("a,b,c", ",", n = 2), c("a", "b,c"))
+  expect_equal(str_split_one("a.b", stringr::fixed(".")), c("a", "b"))
+})
+```
+
+```{r}
+document()
+```
+
+```{r}
+load_all()
+#> ℹ Loading regexcite
+str_split_one("a, b, c", pattern = ", ")
+#> [1] "a" "b" "c"
+```
+
+```{r}
+use_readme_rmd()
+```
+
+```{r}
+build_readme()
+```
+
+```{r}
+check()
+```
+
+```{r}
+install()
+```
+
+
+
+
+
